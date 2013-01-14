@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
 
     url(r'^people/', include('people.urls')),
+    url(r'^u/', include('people.urls_user')),
+    
     url(r'^pagseguro/', include('pagseguro.urls')),
     #url(r'^feedback/', include('djangovoice.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
