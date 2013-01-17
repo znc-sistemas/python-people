@@ -11,16 +11,18 @@ from people.models import UserProfile,  PythonGroup, Survey
 
 
 class UserRegisterForm(UserCreationForm):
-    username = forms.EmailField(label="e-mail", max_length=64, help_text="e-mail as username")
+    username = forms.CharField(label='username', max_length=40)
+    email = forms.EmailField(label="e-mail", max_length=64, help_text="e-mail as username")
     forms.EmailField()
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
 
     def save(self, commit=True):
         user = super(UserRegisterForm, self).save(commit=False)
-        user.email = self.cleaned_data["username"]
+        user.email = self.cleaned_data["email"]
+        user.username = self.cleaned_data['username']
 
         if commit:
             user.save()

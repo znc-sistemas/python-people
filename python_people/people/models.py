@@ -56,8 +56,11 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    @models.permalink
     def get_absolute_url(self):
-        return reverse('user-profile', args=[self.id])
+        if self.user.username:
+            return ('user-profile', (), {'slug': self.user.username})
+        return ('user-profile-old', (), {'pk': self.pk})
 
 
 class PythonGroup(models.Model):
